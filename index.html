@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schutte Engineering</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            <img src="Schutte_Engineering_Logo_HORI_smoll.png" alt="Schutte Engineering Logo" class="logo">
+            <div class="language-switch">
+                <button id="lang-nl" onclick="switchLanguage('nl')">NL</button> | <button id="lang-en" onclick="switchLanguage('en')">EN</button>
+            </div>
+        </div>
+        <div class="content">
+            <h1 id="welcome-message">Welkom bij Schutte Engineering</h1>
+            <p id="intro-message">Ik bied van IT-advies en software/hardware ontwerp.</p>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pages/about.html">Over</a></li>
+                    <li><a href="pages/services.html">Diensten</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                    <li><a href="pages/terms.html">Leveringsvoorwaarden</a></li>
+                </ul>
+            </nav>
+            <section id="home">
+                <h2>Home</h2>
+                <p id="home-content">Welkom bij Schutte Engineering! Wij zijn gespecialiseerd in het bieden van eersteklas IT-advies en innovatieve software- en hardwareontwerpdiensten. Ons doel is om bedrijven te helpen hun activiteiten te stroomlijnen en hun technologische doelen efficiënt en deskundig te bereiken.</p>
+            </section>
+            <section id="contact">
+                <h2>Contact</h2>
+                <form id="contact-form" action="http://localhost:3000/send" method="POST">
+                  <label for="name">Naam:</label>
+                  <input type="text" id="name" name="name" required><br>
+                  <label for="email">E-mail:</label>
+                  <input type="email" id="email" name="email" required><br>
+                  <label for="message">Bericht:</label><br>
+                  <textarea id="message" name="message" rows="4" required></textarea><br>
+                  <input type="submit" value="Verzenden">
+                </form>
+            </section>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const welcomeMessage = document.getElementById('welcome-message');
+            const introMessage = document.getElementById('intro-message');
+            
+            const language = getInitialLanguage();
+            switchLanguage(language);
+            
+            typeWriter(welcomeMessage, welcomeMessage.textContent, 100);
+            typeWriter(introMessage, introMessage.textContent, 100, 3000);
+
+            function typeWriter(element, text, delay, startDelay = 0) {
+                element.textContent = '';
+                let i = 0;
+                setTimeout(() => {
+                    const interval = setInterval(() => {
+                        if (i < text.length) {
+                            element.textContent += text.charAt(i);
+                            i++;
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, delay);
+                }, startDelay);
+            }
+        });
+
+        function getInitialLanguage() {
+            const storedLanguage = localStorage.getItem('language');
+            if (storedLanguage) {
+                return storedLanguage;
+            }
+            const domain = window.location.hostname;
+            return domain.endsWith('.nl') ? 'nl' : 'en';
+        }
+
+        function switchLanguage(lang) {
+            const translations = {
+                en: {
+                    welcomeMessage: "Welcome to Schutte Engineering",
+                    introMessage: "Providing IT consultancy and software/hardware design.",
+                    homeContent: "Welcome to Schutte Engineering! We specialize in providing top-notch IT consultancy and innovative software and hardware design services. Our goal is to help businesses streamline their operations and achieve their technological goals with efficiency and expertise.",
+                    navLinks: ["Home", "About", "Services", "Contact", "Terms of Service"],
+                    contactForm: {
+                        name: "Name:",
+                        email: "Email:",
+                        message: "Message:",
+                        send: "Send"
+                    }
+                },
+                nl: {
+                    welcomeMessage: "Welkom bij Schutte Engineering",
+                    introMessage: "Ik bied IT-advies en software/hardware ontwerp.",
+                    homeContent: "Welkom bij Schutte Engineering! Wij zijn gespecialiseerd in het bieden van eersteklas IT-advies en innovatieve software- en hardwareontwerpdiensten. Ons doel is om bedrijven te helpen hun activiteiten te stroomlijnen en hun technologische doelen efficiënt en deskundig te bereiken.",
+                    navLinks: ["Home", "Over", "Diensten", "Contact", "Leveringsvoorwaarden"],
+                    contactForm: {
+                        name: "Naam:",
+                        email: "E-mail:",
+                        message: "Bericht:",
+                        send: "Verzenden"
+                    }
+                }
+            };
+
+            localStorage.setItem('language', lang);
+
+            document.getElementById('welcome-message').textContent = translations[lang].welcomeMessage;
+            document.getElementById('intro-message').textContent = translations[lang].introMessage;
+            document.getElementById('home-content').textContent = translations[lang].homeContent;
+            document.querySelector('label[for="name"]').textContent = translations[lang].contactForm.name;
+            document.querySelector('label[for="email"]').textContent = translations[lang].contactForm.email;
+            document.querySelector('label[for="message"]').textContent = translations[lang].contactForm.message;
+            document.querySelector('input[type="submit"]').value = translations[lang].contactForm.send;
+
+            const navLinks = document.getElementById('nav-links').getElementsByTagName('a');
+            for (let i = 0; i < navLinks.length; i++) {
+                navLinks[i].textContent = translations[lang].navLinks[i];
+            }
+        }
+    </script>
+</body>
+</html>
+

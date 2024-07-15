@@ -1,0 +1,122 @@
+/* styles.css */
+body {
+    background-color: #2f3b46;
+    color: #00bfff;
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.terminal {
+    width: 80%;
+    margin: auto;
+    border: 2px solid #00bfff;
+    padding: 20px;
+    margin-top: 50px;
+    background-color: #1c1c1c;
+}
+
+.header {
+    border-bottom: 2px solid #00bfff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00bfff;
+}
+
+.language-switch button {
+    background: none;
+    border: none;
+    color: #00bfff;
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.language-switch button:hover {
+    text-decoration: underline;
+}
+
+.content h1, .content h2 {
+    color: #00bfff;
+    margin: 10px 0;
+}
+
+.content h1 {
+    font-size: 28px;
+}
+
+.content h2 {
+    font-size: 24px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #00bfff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+p, li {
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #00bfff;
+    border-radius: 4px;
+    background-color: #000000;
+    color: #00bfff;
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #00bfff;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0080ff;
+}
+

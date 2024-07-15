@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leveringsvoorwaarden</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            <span class="title">Schutte Engineering</span>
+            <div class="language-switch">
+                <button onclick="switchLanguage('nl')">NL</button> | <button onclick="switchLanguage('en')">EN</button>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Leveringsvoorwaarden</h1>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">Over</a></li>
+                    <li><a href="services.html">Diensten</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="terms.html">Leveringsvoorwaarden</a></li>
+                </ul>
+            </nav>
+            <section id="terms">
+              <h2>Leveringsvoorwaarden</h2>
+              <p>Voor mijn leveringsvoorwaarden maak ik gebruik van de NLDigital Voorwaarden.</p>
+              <button id="download-pdf" onclick="downloadPDF()">Download NLDigital Voorwaarden PDF</button>
+              <p>De volledige voorwaarden zijn ook te vinden op de officiële website van <a href="https://www.nldigital.nl/">NLDigital</a>.</p>
+            </section>
+            <script>
+              function downloadPDF() {
+                window.open('../documents/NLdigital Voorwaarden-NL.pdf', '_blank');
+              }
+            </script>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const language = getInitialLanguage();
+            switchLanguage(language);
+        });
+
+        function getInitialLanguage() {
+            const storedLanguage = localStorage.getItem('language');
+            if (storedLanguage) {
+                return storedLanguage;
+            }
+            const domain = window.location.hostname;
+            return domain.endsWith('.nl') ? 'nl' : 'en';
+        }
+
+        function switchLanguage(lang) {
+            const translations = {
+                en: {
+                    termsHeader: "Terms of Service",
+                    termsContent: "For my terms of service, I use the NLDigital Voorwaarden.",
+                    termsLink: "The full terms can be found on the official NLDigital website.",
+                    navLinks: ["Home", "About", "Services", "Contact", "Terms of Service"]
+                },
+                nl: {
+                    termsHeader: "Leveringsvoorwaarden",
+                    termsContent: "Voor mijn leveringsvoorwaarden maak ik gebruik van de NLDigital Voorwaarden.",
+                    termsLink: "De volledige voorwaarden zijn te vinden op de officiële website van NLDigital.",
+                    navLinks: ["Home", "Over", "Diensten", "Contact", "Leveringsvoorwaarden"]
+                }
+            };
+
+            localStorage.setItem('language', lang);
+
+            document.querySelector('.content h1').textContent = translations[lang].termsHeader;
+            document.querySelector('#terms > p:nth-child(2)').textContent = translations[lang].termsContent;
+            document.querySelector('#terms > p:nth-child(3)').textContent = translations[lang].termsLink;
+
+            const navLinks = document.getElementById('nav-links').getElementsByTagName('a');
+            for (let i = 0; i < navLinks.length; i++) {
+                navLinks[i].textContent = translations[lang].navLinks[i];
+            }
+        }
+    </script>
+</body>
+</html>
+

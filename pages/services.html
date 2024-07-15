@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onze Diensten</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            <span class="title">Schutte Engineering</span>
+            <div class="language-switch">
+                <button onclick="switchLanguage('nl')">NL</button> | <button onclick="switchLanguage('en')">EN</button>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Onze Diensten</h1>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">Over</a></li>
+                    <li><a href="services.html">Diensten</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="terms.html">Leveringsvoorwaarden</a></li>
+                </ul>
+            </nav>
+            <section id="services">
+                <h2>Diensten</h2>
+                <p>Ik bied een breed scala aan diensten om aan de diverse behoeften van mijn klanten te voldoen:</p>
+                <ul>
+                    <li><strong>IT-advies:</strong> Deskundig advies over IT-strategie, infrastructuur en operaties om uw bedrijfsresultaten te optimaliseren.</li>
+                    <li><strong>Softwareontwerp:</strong> Aangepaste softwareoplossingen die zijn afgestemd op uw bedrijfsvereisten.</li>
+                    <li><strong>Hardwareontwerp:</strong> Innovatief hardwareontwerp en prototyping om uw ideeën tot leven te brengen.</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const language = getInitialLanguage();
+            switchLanguage(language);
+        });
+
+        function getInitialLanguage() {
+            const storedLanguage = localStorage.getItem('language');
+            if (storedLanguage) {
+                return storedLanguage;
+            }
+            const domain = window.location.hostname;
+            return domain.endsWith('.nl') ? 'nl' : 'en';
+        }
+
+        function switchLanguage(lang) {
+            const translations = {
+                en: {
+                    servicesHeader: "Our Services",
+                    servicesContent: "I offer a wide range of services to meet the diverse needs of my clients:",
+                    itConsultancy: "IT Consultancy: Expert advice on IT strategy, infrastructure, and operations to optimize your business performance.",
+                    softwareDesign: "Software Design: Custom software solutions tailored to your business requirements.",
+                    hardwareDesign: "Hardware Design: Innovative hardware design and prototyping to bring your ideas to life.",
+                    navLinks: ["Home", "About", "Services", "Contact", "Terms of Service"]
+                },
+                nl: {
+                    servicesHeader: "Onze Diensten",
+                    servicesContent: "Ik bied een breed scala aan diensten om aan de diverse behoeften van mijn klanten te voldoen:",
+                    itConsultancy: "IT-advies: Deskundig advies over IT-strategie, infrastructuur en operaties om uw bedrijfsresultaten te optimaliseren.",
+                    softwareDesign: "Softwareontwerp: Aangepaste softwareoplossingen die zijn afgestemd op uw bedrijfsvereisten.",
+                    hardwareDesign: "Hardwareontwerp: Innovatief hardwareontwerp en prototyping om uw ideeën tot leven te brengen.",
+                    navLinks: ["Home", "Over", "Diensten", "Contact", "Leveringsvoorwaarden"]
+                }
+            };
+
+            localStorage.setItem('language', lang);
+
+            document.querySelector('.content h1').textContent = translations[lang].servicesHeader;
+            document.querySelector('#services > p').textContent = translations[lang].servicesContent;
+            document.querySelector('#services > ul > li:nth-child(1)').textContent = translations[lang].itConsultancy;
+            document.querySelector('#services > ul > li:nth-child(2)').textContent = translations[lang].softwareDesign;
+            document.querySelector('#services > ul > li:nth-child(3)').textContent = translations[lang].hardwareDesign;
+
+            const navLinks = document.getElementById('nav-links').getElementsByTagName('a');
+            for (let i = 0; i < navLinks.length; i++) {
+                navLinks[i].textContent = translations[lang].navLinks[i];
+            }
+        }
+    </script>
+</body>
+</html>
+
